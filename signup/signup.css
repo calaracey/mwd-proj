@@ -1,0 +1,36 @@
+body {
+  background-color: white;
+  max-width: 1000px;
+  margin: auto;
+  padding: 1em 1em 1em 1em;
+}
+
+.navigation{
+  display: flex;
+  justify-content: space-between; 
+  margin:0;
+  padding: 0;
+}
+
+.navigation ul {
+  margin:0;
+  padding:0;
+  list-style: none;
+  display: flex;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: black;
+  padding: 0.5em;
+  font-family: "Inter", sans-serif;
+  font-size: 110%;
+}
+
+.navigation .logo a {
+  padding:0;
+}
+
+img {
+  margin: 0em 0.3em 0em 0em;
+}
