@@ -25,7 +25,6 @@ angular.module('app').component('home', home);
 
 // Home Controller with dependency injection using the array method
 angular.module('app').controller('HomeController', function () {
-
 });
 /*--------------------- Home Component ---------------------*/
 /*--------------------- StoryView Component ---------------------*/
@@ -69,7 +68,7 @@ angular.module('app').controller('StorySubmitController', function () {
     this.submitted = true;
   };
 
-}]);
+});
 /*--------------------- StorySubmit Component ---------------------*/
 
 /*--------------------- StoryVote Component ---------------------*/
@@ -82,13 +81,23 @@ const storyVote = {
 angular.module('app').component('storyVote', storyVote);
 
 // StoryView Controller with dependency injection using the array method
-angular.module('app').controller('StoryVoteController', function () {
+angular.module('app').controller('StoryVoteController', ['DataService', function (DataService) {
+  console.log("into story vote controller");
+  const $ctrl = this;
   this.submissionList = []; 
-  this.submitted = false;
-  this.submit = function() {
-    //In the future we will perform a POST on submit() when there is a real backend
-    this.userSubmission = "";
-    this.submitted = true;
+  this.submissionIndex = 0;
+  this.currentSubmission = "Hello";
+  this.init = function() {
+    DataService.getData('data.json').then(function(result) {
+      $ctrl.submissionList = result.data.submissions;
+      $ctrl.currentSubmission = $ctrl.submissionList[$ctrl.submissionIndex];
+      console.log("Initialization succeeded");
+      console.log($ctrl.currentSubmission);
+    });
+  };
+  this.next = function() {
+    $ctrl.submissionIndex ++;
+    $ctrl.currentSubmission = $ctrl.submissionList[$ctrl.submissionIndex];
   };
 
 }]);
