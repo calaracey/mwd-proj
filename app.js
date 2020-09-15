@@ -34,35 +34,68 @@ const storyView = {
     controller: 'StoryViewController'
 }
 
-// Home Component with Routing (Routed / Stateful)
+// StoryView Component with Routing (Routed / Stateful)
 angular.module('app').component('storyView', storyView);
 
-// Home Controller with dependency injection using the array method
-angular.module('app').controller('StoryViewController', ['ExampleService', function (ExampleService) {
-  this.storyList = ExampleService.getData('data.json').data.story;
+// StoryView Controller with dependency injection using the array method
+angular.module('app').controller('StoryViewController', ['DataService', function (DataService) {
+  const $ctrl = this;
+  this.storyList = [];
+  DataService.getData('data.json').then(function(result) {
+    $ctrl.storyList = result.data.story;
+    console.log(result.data);
+    console.log(this.storyList);
+  });
 
 }]);
 /*--------------------- StoryView Component ---------------------*/
 
-/*--------------------- Settings Component ---------------------*/
-const settings = {
-    templateUrl: '',
-    controller: 'SettingsController'
+/*--------------------- StorySubmit Component ---------------------*/
+const storySubmit = {
+    templateUrl: './story-submit/story-submit.html',
+    controller: 'StorySubmitController'
 }
 
-// Settings Component with Routing (Routed / Stateful)
-angular.module('app').component('settings', settings)
+// StoryView Component with Routing (Routed / Stateful)
+angular.module('app').component('storySubmit', storySubmit);
 
-// Settings Controller with dependency injection using $inject method
-function SettingsController(ExampleService) {
+// StoryView Controller with dependency injection using the array method
+angular.module('app').controller('StorySubmitController', function () {
+  this.userSubmission = ""; 
+  this.submitted = false;
+  this.submit = function() {
+    //In the future we will perform a POST on submit() when there is a real backend
+    this.userSubmission = "";
+    this.submitted = true;
+  };
 
+}]);
+/*--------------------- StorySubmit Component ---------------------*/
+
+/*--------------------- StoryVote Component ---------------------*/
+const storyVote = {
+    templateUrl: './story-vote/story-vote.html',
+    controller: 'StoryVoteController'
 }
-SettingsController.$inject = ['ExampleService'];
-angular.module('app').controller('SettingsController', SettingsController);
-/*--------------------- Settings Component ---------------------*/
 
-/*--------------------- Example Service ---------------------*/
-function ExampleService($http) {
+// StoryView Component with Routing (Routed / Stateful)
+angular.module('app').component('storyVote', storyVote);
+
+// StoryView Controller with dependency injection using the array method
+angular.module('app').controller('StoryVoteController', function () {
+  this.submissionList = []; 
+  this.submitted = false;
+  this.submit = function() {
+    //In the future we will perform a POST on submit() when there is a real backend
+    this.userSubmission = "";
+    this.submitted = true;
+  };
+
+}]);
+/*--------------------- StoryVote Component ---------------------*/
+
+/*--------------------- DataService ---------------------*/
+function DataService($http) {
   // Services are Singletons
     // Properties
     // Methods
@@ -88,9 +121,9 @@ function ExampleService($http) {
     //    // or server returns response with an error status.
     //  });
 }
-ExampleService.$inject = ['$http'];
-angular.module('app').service('ExampleService', ExampleService);
+DataService.$inject = ['$http'];
+angular.module('app').service('DataService', DataService);
 
 
 
-/*--------------------- Example Service ---------------------*/
+/*--------------------- Data Service ---------------------*/
