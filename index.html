@@ -1,67 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Collaborative Writing</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en-us" ng-app="app">
 
+    <head>
+        <title>Collaborative Writing</title>
+        <!-- Angular Material CSS now available via Google CDN; version 1.1.23 used here -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.23/angular-material.min.css">
+        <link href="styles.css" rel="stylesheet" />
+    </head>
 
-   <link href="https://fonts.googleapis.com/css2?family=Lusitana&display=swap" rel="stylesheet">
+    <body>
 
-
-
-  </head>
-  <body>
-    <br>
-<header>
-  <nav class="navigation">
-    <div class="leftNav">
-      <ul class="logo">
-        <li> <img src="images/white_pyramid.png" width=22em height=22em "></img></li>
-       <li><a href="">Collaborative Writing</a></li>
-      </ul>
-    </div>
-    <div class="rightNav">  
-      <ul class="options">
-       <li><a href="signup/signup.html">Sign up</a></li>
-       <li><a href="login/login.html">Log in</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-<br>
-<br>
-<main>
-<p>It was nearly noon, and the sun was at its strongest. But the time did not matter so much; on this side of the planet, the sun never set. The harsh bloodred rays pierced through the hazy atmosphere and reflected painfully off of the chrome finish of a rocketship. into the dry sand in which three delicate landing gears were buried. The rocketship was a plain and rudimentary one; it resembled a metal tube capped by a welded-on cone with a single circular window, but it towered over the endless sand like a great statue. Above the landing gears was a closed hatch, underneath which emerged a simple draw bridge. 
-</p>
-<p>
-    The rocketship sat undisturbed in a deep valley of sand and desolation. Nearby was a small pool of clear but lifeless water,marking the low point. It was impossible to see beyond the mountains of sand that gradually sloped upwards for endless miles in any direction. This was an unforgiving territory. The sand contained the sunken bodies of centuries of marooned pilots, who had landed here in the hopes of finding supplies and instead succumbed to the blistering heat and choked on the dusty atmosphere. 
-</p>
-<p>
-    There was no existence beyond the dunes, the pool, and the rocketship. Except, there was a small noise; a regular, faint, rumbling, almost imperceptible at first. It came from the west. It was difficult to tell where the dune basin ended and the yellow atmosphere began; far in the distance, they blended, shimmering in the heat.
-<p>
-    Then a shape, cut across the horizon, mounting the top of the dune. A golden helmet appeared first, attached to a black-clad figure. He was riding a camel.  
-  </p>
-  </main>
-<br>
-<h1> </h1>
-  <form action="/submit.php">
-  <textarea name="message" placeholder="What happens next?"" rows="10" cols="30"></textarea>
-  <br><br>
-  <input type="submit">
-</form>
-<h1> Or vote on other submissions: </h1>
-<div class="submission">
-<p>
-  1/5
-  <br>
-  Behind him sat a boy slumped over, wearing a tattered white robe. The camel trotted wildly down the dune, taking a diagonal path so as to make the grade more manageable. The figure whipped the camel, urging it onwards with great haste, its hooves furiously kicking up sand behind it. </p>
-</div>
-<form action="/vote.php">
-  <input type="submit" value="Yes">
-  <input type="submit" value="Next">
-</form>
-</body>
+        <navigation></navigation>
+        <story-view></story-view>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-messages.min.js"></script>
+        <!-- Angular Material Javascript now available via Google CDN; version 1.1.23 used here -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.23/angular-material.min.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>
