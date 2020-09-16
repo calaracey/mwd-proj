@@ -1,6 +1,6 @@
 <div>
     <navigation></navigation>
-    <story-view></story-view>
-    <story-submit></story-submit>
+    <story-view ng-repeat="story in $ctrl.storyList track by $index" story="story"></story-view>
+    <story-submit userSubmission="$ctrl.submission" on-submit="$ctrl.submit($event);"></story-submit>
     <story-vote></story-vote>
 </div>

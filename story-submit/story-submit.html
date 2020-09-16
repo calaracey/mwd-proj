@@ -1,8 +1,9 @@
 <div>
   <h1 ng-hide="!$ctrl.submitted"> Thanks for your submission! </h1>
   <form>
-  <textarea ng-model="$ctrl.userSubmission" ng-hide="$ctrl.submitted" placeholder="What happens next?"" rows="10" cols="30"></textarea>
   <br ng-hide="$ctrl.submitted"><br>
-  <input type="submit" ng-hide="$ctrl.submitted" ng-click="$ctrl.submit()">
+  <input type="text" ng-hide="$ctrl.submitted" ng-model="$ctrl.submission">
+  <a href="" ng-click="$ctrl.updateSubmission()">Submit</a>
+
 </form>
 </div>

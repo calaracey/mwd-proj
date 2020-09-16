@@ -14,6 +14,7 @@ angular.module('app').controller('NavigationController', function () {
   this.loggedIn = false;
 });
 /*--------------------- Navigation Component ---------------------*/
+
 /*--------------------- Home Component ---------------------*/
 const home = {
     templateUrl: './home/home.html',
@@ -24,50 +25,80 @@ const home = {
 angular.module('app').component('home', home);
 
 // Home Controller with dependency injection using the array method
-angular.module('app').controller('HomeController', function () {
-});
+angular.module('app').controller('HomeController', ['DataService', function (DataService) {
+  const $ctrl = this;
+    
+  // StoryView binding
+  this.storyList = [];
+  DataService.getData('data.json').then(function(result) {
+    $ctrl.storyList = result.data["story"];
+    console.log($ctrl.storyList);
+  });
+
+  // StorySubmit binding
+  this.submission = ""; 
+  this.submitted = false;
+  this.submit = function (event) {
+    //In the future we will perform a POST on submit() when there is a real backend
+    $ctrl.submission = event.submission;
+    $ctrl.submitted = true;
+    console.log(event.submission);
+    $ctrl.storyList.push($ctrl.submission);
+  };
+    
+}]);
 /*--------------------- Home Component ---------------------*/
+
 /*--------------------- StoryView Component ---------------------*/
+
 const storyView = {
     templateUrl: './story-view/story-view.html',
-    controller: 'StoryViewController'
+    controller: 'StoryViewController',
+    bindings: {
+        story: '<'
+    }
 }
 
 // StoryView Component with Routing (Routed / Stateful)
 angular.module('app').component('storyView', storyView);
 
-// StoryView Controller with dependency injection using the array method
-angular.module('app').controller('StoryViewController', ['DataService', function (DataService) {
-  const $ctrl = this;
-  this.storyList = [];
-  DataService.getData('data.json').then(function(result) {
-    $ctrl.storyList = result.data.story;
-    console.log(result.data);
-    console.log(this.storyList);
-  });
-
-}]);
+// StoryView Controller
+angular.module('app').controller('StoryViewController', function(){
+});
 /*--------------------- StoryView Component ---------------------*/
 
 /*--------------------- StorySubmit Component ---------------------*/
 const storySubmit = {
     templateUrl: './story-submit/story-submit.html',
-    controller: 'StorySubmitController'
+    controller: 'StorySubmitController',
+    bindings: {
+      submission: '<',
+      onSubmit: '&'
+    }
 }
 
-// StoryView Component with Routing (Routed / Stateful)
+// StorySubmit Component with Routing (Routed / Stateful)
 angular.module('app').component('storySubmit', storySubmit);
 
-// StoryView Controller with dependency injection using the array method
+// StorySubmit Controller with dependency injection using the array method
 angular.module('app').controller('StorySubmitController', function () {
-  this.userSubmission = ""; 
-  this.submitted = false;
-  this.submit = function() {
-    //In the future we will perform a POST on submit() when there is a real backend
-    this.userSubmission = "";
-    this.submitted = true;
-  };
+  const $ctrl = this;
 
+  // Data up and down
+  $ctrl.$onChanges = function (changes) {
+    if (changes.submission){
+      $ctrl.submission = angular.copy($ctrl.submission);
+    }
+  };
+  $ctrl.updateSubmission = function () {
+    console.log('invoke fxn')
+    $ctrl.onSubmit({
+      $event: {
+        submission: $ctrl.submission
+      }
+    });
+    $ctrl.submission = "";
+  };
 });
 /*--------------------- StorySubmit Component ---------------------*/
 
@@ -77,10 +108,10 @@ const storyVote = {
     controller: 'StoryVoteController'
 }
 
-// StoryView Component with Routing (Routed / Stateful)
+// StoryVote Component with Routing (Routed / Stateful)
 angular.module('app').component('storyVote', storyVote);
 
-// StoryView Controller with dependency injection using the array method
+// StoryVote Controller with dependency injection using the array method
 angular.module('app').controller('StoryVoteController', ['DataService', function (DataService) {
   console.log("into story vote controller");
   const $ctrl = this;
